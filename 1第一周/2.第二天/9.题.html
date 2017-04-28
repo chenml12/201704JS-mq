@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+<script type="text/javascript">
+    Object.prototype.d=3;
+    Object.a="1";
+    Object.prototype.c=5;
+    function FF() {
+        this.a=1; this.b=2;
+    }
+    FF.prototype.c=6; FF.prototype.a=4;
+    FF.a=12;
+    var f1=new FF();var f2=new FF();
+    console.log(f1.a);//1
+    console.log(f1.b);//2
+    console.log(f1.c);//6
+    console.log(f1.d);//3
+    console.log(f1.s);//undefined
+
+    //caller:检验函数被谁调用过,没有就是null，
+    function Fn() {
+        console.log(arguments.callee.caller);
+        console.log(Fn.prototype.constructor === arguments.callee);
+    }
+    function fn() {
+        Fn()
+    }
+    fn();
+
+
+    function sum(n) {
+        console.log(arguments.callee===arguments.callee.caller);
+        if(n<=0){
+            return 0
+        }
+        return n+sum(--n);
+    }
+    console.log(sum(10));
+</script>
+</body>
+
+</html>
